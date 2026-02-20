@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://kc5hs7q1fc4l"]
+
+[ext_resource type="Texture2D" uid="uid://dqpxoohxa11nl" path="res://assets/playerShip1_red.png" id="1_uhymo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8fr8l"]
+bounce = 0.8
+absorbent = true
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(100.011, 77.4256)
+
+[node name="RedShip" type="RigidBody2D" unique_id=1469847258]
+physics_material_override = SubResource("PhysicsMaterial_8fr8l")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1092921149]
+texture = ExtResource("1_uhymo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1857659860]
+shape = SubResource("1")

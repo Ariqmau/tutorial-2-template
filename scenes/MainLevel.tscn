@@ -1,16 +1,31 @@
 [gd_scene format=3 uid="uid://cdoksexcakmop"]
 
-[ext_resource type="PackedScene" uid="uid://y5a4e3ajuy2r" path="res://scenes/StonePlatform.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://y5a4e3ajuy2r" path="res://scenes/SnowPlatform.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://dcwu8ypraifim" path="res://assets/icon.png" id="1_yxyfn"]
 [ext_resource type="PackedScene" uid="uid://datfp8kxjrjg" path="res://scenes/BlueShip.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bsuv2svmaqypq" path="res://scenes/PlatformBlue.gd" id="3"]
 [ext_resource type="Script" uid="uid://x2rdmjyr1ttw" path="res://scenes/ObjectiveArea.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://kc5hs7q1fc4l" path="res://scenes/RedShip.tscn" id="5_huru0"]
+[ext_resource type="Texture2D" uid="uid://dh610bbucs6rh" path="res://assets/fasilkom.png" id="6_xum0q"]
+[ext_resource type="Script" uid="uid://quj6q7ayklau" path="res://scenes/reser_zone.gd" id="7_xum0q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxyfn"]
+size = Vector2(140.5, 70)
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(138.75, 79)
+size = Vector2(143.375, 102.68939)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xum0q"]
+size = Vector2(2648, 265)
 
 [node name="MainLevel" type="Node" unique_id=832108525]
 
-[node name="PlatformBlue" type="Node2D" parent="." unique_id=1028510209]
+[node name="Icon" type="Sprite2D" parent="." unique_id=333718931]
+position = Vector2(533.0002, 985.0001)
+scale = Vector2(101.35717, 79.974976)
+texture = ExtResource("1_yxyfn")
+
+[node name="PlatformBlue" type="AnimatableBody2D" parent="." unique_id=1664373971]
 position = Vector2(35, 565)
 script = ExtResource("3")
 
@@ -19,15 +34,39 @@ script = ExtResource("3")
 [node name="StonePlatform2" parent="PlatformBlue" unique_id=1594265889 instance=ExtResource("1")]
 position = Vector2(70, 0)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformBlue" unique_id=226623858]
+position = Vector2(34.75, 0)
+shape = SubResource("RectangleShape2D_yxyfn")
+
 [node name="BlueShip" parent="." unique_id=150247224 instance=ExtResource("2")]
 position = Vector2(72.7009, 421.901)
 lock_rotation = true
 
+[node name="RedShip" parent="." unique_id=1469847258 instance=ExtResource("5_huru0")]
+position = Vector2(72, 303)
+
 [node name="ObjectiveArea" type="Area2D" parent="." unique_id=779178061]
+position = Vector2(18, -71)
 script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea" unique_id=670694693]
-position = Vector2(70.625, 40)
+position = Vector2(1046.4918, 165.87953)
+rotation = -2.3561912
+scale = Vector2(1.0081515, 1.0000002)
 shape = SubResource("1")
 
+[node name="MeteorBrownBig1" type="Sprite2D" parent="ObjectiveArea" unique_id=317533219]
+position = Vector2(1047.1232, 166.12323)
+rotation = -2.3561912
+scale = Vector2(1.4298784, 1.2619051)
+texture = ExtResource("6_xum0q")
+
+[node name="ReserZone" type="Area2D" parent="." unique_id=1703271878]
+script = ExtResource("7_xum0q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReserZone" unique_id=52690646]
+position = Vector2(539, 859)
+shape = SubResource("RectangleShape2D_xum0q")
+
 [connection signal="body_entered" from="ObjectiveArea" to="ObjectiveArea" method="_on_ObjectiveArea_body_entered"]
+[connection signal="body_entered" from="ReserZone" to="ReserZone" method="_on_body_entered"]
